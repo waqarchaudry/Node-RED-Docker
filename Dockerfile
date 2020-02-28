@@ -4,12 +4,12 @@ RUN apt-get update \
   && apt-get install -y build-essential python perl-modules
 
 RUN deluser --remove-home node \
-  && groupadd --gid 1000 nodered \
-  && useradd --gid nodered --uid 1000 --shell /bin/bash --create-home nodered
-
-RUN mkdir -p /data && chown 1000 /data
+  && useradd --gid 0 --uid 1000 --shell /bin/bash --create-home nodered
 
 USER 1000
+
+RUN mkdir -p /data
+
 WORKDIR /data
 
 COPY ./package.json /data/
@@ -21,12 +21,11 @@ FROM node:lts-slim
 RUN apt-get update && apt-get install -y perl-modules && rm -rf /var/lib/apt/lists/*
 
 RUN deluser --remove-home node \
-  && groupadd --gid 1000 nodered \
-  && useradd --gid nodered --uid 1000 --shell /bin/bash --create-home nodered
-
-RUN mkdir -p /data && chown 1000 /data
+  && useradd --gid 0 --uid 1000 --shell /bin/bash --create-home nodered
 
 USER 1000
+
+RUN mkdir -p /data
 
 COPY ./server.js /data/
 COPY ./settings.js /data/
