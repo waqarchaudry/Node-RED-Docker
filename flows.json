@@ -56,8 +56,8 @@
         "topic": "",
         "payload": "${WWW}",
         "payloadType": "str",
-        "x": 120,
-        "y": 100,
+        "x": 150,
+        "y": 90,
         "wires": [
             [
                 "42580302.ca5b44"
